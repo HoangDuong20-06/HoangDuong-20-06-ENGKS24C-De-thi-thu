@@ -1,7 +1,8 @@
 #include<stdio.h>
 int main(){
-	int choice,m,n,temp,result;
+	int choice,m,n,temp,result,search_value,flag_i,flag_j;
 	int a[100][100];
+	int one_way[100];
 	do{
 	    printf("MENU\n");
 	    printf("1. Nhap kich co va gia tri cac phan tu cua mang\n");
@@ -79,10 +80,48 @@ int main(){
 				break;
 			// case 6: Sap xep duong cheo chinh theo thu tu tang dan
 			case 6:
-			
-			break;
+				if (m==n){
+			  	    for (int i = 0; i<m; i++){
+			  	        one_way[i]=a[i][i];
+				    }
+			    } else {
+				    printf ("Khong hop le");
+			    }		
+			     printf ("Mang sau khi xap xep:");
+			     for (int i = 0; i < (m) - 1; i++) {
+                     for (int j = 0; j < (m)- i - 1; j++) {
+                        if (a[j + 1] < a[j]) {
+                            temp = one_way[j];
+                            one_way[j] = one_way[j + 1];
+                            one_way[j + 1] = temp;
+                        }
+                    }
+		        }
+		        for (int i=0; i<m; i++){
+		     	    printf ("%d ", one_way[i]);
+				}
+				break;
 			// case 7: Tim kiem mot phan tu va in ra vi tri cua phan tu do trong mang
 			case 7:
+				printf ("moi ban nhap gia tri can tim:");
+			 	scanf ("%d",&search_value);
+			 	 flag_i=-1;
+			 	 flag_j=-1;
+			 	for (int i=0; i<m; i++) {
+            		for (int j=0; j<n; j++){
+                         if (search_value==a[i][j])
+						 {
+						 	flag_i= i;
+						 	flag_j= j;
+						 	printf ("vi tri so can tim nam o hang %d cot %d\n",flag_i,flag_j);
+						 	break;
+						 }   		
+					}
+				}
+				if (flag_i==-1 && flag_j==-1)
+				{
+					printf ("vi tri khong ton tai");
+					}
 				break;
 			// case 8: Thoat
 			case 8:
